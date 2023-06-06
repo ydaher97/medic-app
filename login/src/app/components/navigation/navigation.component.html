@@ -1,0 +1,17 @@
+<mat-toolbar class="mat" color="accent">
+    
+       <span class="left"><a routerLink="/">
+        <span >social posts</span></a></span> 
+        <span class="right">
+            <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/posts">
+                <span >posts</span></a>
+            <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/quizzes">
+                    <span >quiz</span></a>
+            <a *ngIf="!isAuthenticated" routerLinkActive="active-link" routerLink="/login">
+                <span >login</span></a>
+            <a *ngIf="isAuthenticated" (click)="logout()" routerLinkActive="active-link" routerLink="/login">
+                <span >logout</span></a>
+            <a *ngIf="!isAuthenticated" routerLinkActive="active-link" routerLink="/signup">
+                <span >signup</span></a>
+        </span >
+</mat-toolbar>

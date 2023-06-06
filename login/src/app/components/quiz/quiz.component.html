@@ -1,0 +1,62 @@
+<div class="start_btn" (click)="showWarningPopup()"><button>start quiz</button></div>
+
+<div class="info_box" [ngClass]="showWarning ? 'activeInfo': ''">
+    <div class="info-title"><span>some rules of this quiz</span></div>
+    <div class="info-list">
+        <div class="info">1</div>
+        <div class="info">2</div>
+        <div class="info">3</div>
+        <div class="info">4</div>
+
+    </div>
+    <div class="buttons">
+        <button class="quit">exit quit</button>
+        
+        <button class="restart" (click)="startQuiz()">continue</button>
+    </div>
+</div>
+
+<div class="quiz_box" [ngClass]="isQuizStarted ? 'activeQuiz':'' " >
+    <header>
+        <div class="title">{{quiz.title}} </div>
+        <div class="timer">{{quiz.duration}}
+            <div class="time_left_text">time off</div>
+            <div class="timer_sec">{{remainingTime}}</div>
+        </div>
+        <div class="time_line" style="width: 550px;"></div>
+    </header>
+    <section *ngIf="isQuizStarted" >
+        <div class="que_text" ><span>{{currentQuestionNo+1}}.  {{questionsList[currentQuestionNo].question_text}} </span></div>
+        <div class="option_list"  >
+            <div class="option" [ngClass]="{'disabled':isOptionSelected(questionsList[currentQuestionNo].answers),
+                                            'Correct': option.isSelected  && option.is_correct ,
+                                            'inCorrect': option.isSelected && !option.is_correct}"  (click)="selectOption(option)" *ngFor="let option of questionsList[currentQuestionNo].answers">
+                <span>{{ option.answer_text }} ({{ option.is_correct ? 'Correct' : 'Incorrect' }})</span>
+            </div>
+           
+        </div>
+    </section>
+    <footer>
+        <div class="total_que"><span>
+            <p>{{currentQuestionNo+1}}</p> of <p>{{questionsList.length}}</p> Questions
+        </span></div>
+        <button  class="next_btn show" (click)="finish()" >finish</button>
+        <button  class="next_btn show" (click)="nextbtn()"  >next</button>
+
+    </footer>
+</div>
+
+
+<div class="result_box" [ngClass]="isQuizEnded? 'activeResult':''">
+    <div class="icon">
+        <i class="fas fa-crown"></i>
+    </div>
+    <div class="complete_text">completed</div>
+    <div class="score"></div>
+
+    <div class="buttons">
+        <button class="restart">replay</button>
+        <button class="quit">quit</button>
+
+    </div>
+</div>

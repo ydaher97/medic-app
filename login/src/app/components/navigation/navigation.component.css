@@ -1,0 +1,18 @@
+.mat{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 6%;
+
+}
+
+ a {
+    text-decoration: none;
+    &.active-link{
+        color: white;
+    }
+}
+
+span{
+    margin-left: 24px;
+    
+}

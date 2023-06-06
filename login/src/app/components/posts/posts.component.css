@@ -1,0 +1,20 @@
+mat-card{
+    margin-bottom: 1rem;
+    font-size: 24px;
+}
+.post-title{
+    font-weight: bold;
+}
+button{
+    display: inline;
+    align-self: flex-end;
+}
+
+.post-meta{
+    font-style: italic;
+    font-size: 16px;
+    float: right;
+}
+.post-body{
+    margin-top: 20px;    
+}
