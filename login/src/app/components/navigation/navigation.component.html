@@ -1,10 +1,10 @@
-<mat-toolbar class="mat" color="accent">
+<mat-toolbar class="mat" color="primary">
     
        <span class="left"><a routerLink="/">
-        <span >social posts</span></a></span> 
+        <span >MEDIC APP</span></a></span> 
         <span class="right">
             <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/posts">
-                <span >posts</span></a>
+                <span >topics</span></a>
             <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/quizzes">
                     <span >quiz</span></a>
             <a *ngIf="!isAuthenticated" routerLinkActive="active-link" routerLink="/login">

@@ -7,6 +7,7 @@
 
  a {
     text-decoration: none;
+    color: #fbd1a2;
     &.active-link{
         color: white;
     }
@@ -14,5 +15,5 @@
 
 span{
     margin-left: 24px;
-    
+   
 }

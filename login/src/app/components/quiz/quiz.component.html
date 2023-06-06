@@ -29,8 +29,9 @@
         <div class="que_text" ><span>{{currentQuestionNo+1}}.  {{questionsList[currentQuestionNo].question_text}} </span></div>
         <div class="option_list"  >
             <div class="option" [ngClass]="{'disabled':isOptionSelected(questionsList[currentQuestionNo].answers),
-                                            'Correct': option.isSelected  && option.is_correct ,
-                                            'inCorrect': option.isSelected && !option.is_correct}"  (click)="selectOption(option)" *ngFor="let option of questionsList[currentQuestionNo].answers">
+                                            'correct': option.isSelected  && option.is_correct ,
+                                            'incorrect': option.isSelected && !option.is_correct
+                                             }"  (click)="selectOption(option)" *ngFor="let option of questionsList[currentQuestionNo].answers">
                 <span>{{ option.answer_text }} ({{ option.is_correct ? 'Correct' : 'Incorrect' }})</span>
             </div>
            
@@ -40,8 +41,8 @@
         <div class="total_que"><span>
             <p>{{currentQuestionNo+1}}</p> of <p>{{questionsList.length}}</p> Questions
         </span></div>
-        <button  class="next_btn show" (click)="finish()" >finish</button>
-        <button  class="next_btn show" (click)="nextbtn()"  >next</button>
+        <button *ngIf="currentQuestionNo+1 == questionsList.length" class="next_btn show" (click)="finish()" >finish</button>
+        <button  *ngIf="currentQuestionNo+1 !== questionsList.length" class="next_btn show" (click)="nextbtn()"  >next</button>
 
     </footer>
 </div>
@@ -52,11 +53,11 @@
         <i class="fas fa-crown"></i>
     </div>
     <div class="complete_text">completed</div>
-    <div class="score"></div>
+    <div class="score">You have {{correctAnswerCount}} of {{questionsList.length}}</div>
 
     <div class="buttons">
-        <button class="restart">replay</button>
-        <button class="quit">quit</button>
+        <button class="restart" (click)="replay()">replay</button>
+        <button class="quit" (click)="start()">quit</button>
 
     </div>
 </div>

@@ -46,6 +46,34 @@ finish() {
     this.showWarning = true;
   }
 
+  replay(){
+    this.showWarning =false;
+    this.isQuizStarted = true;
+    this.isQuizEnded = false;
+    this.currentQuestionNo = 0;
+    for (const question of this.questionsList) {
+      for (const option of question.answers) {
+        option.isSelected = false;
+      }
+    }
+    this.correctAnswerCount = 0;
+    this.remainingTime = 10;
+  }
+
+  start(){
+    this.showWarning = false;
+    this.isQuizStarted = false;
+    this.isQuizEnded = false;
+    this.currentQuestionNo = 0;
+    for (const question of this.questionsList) {
+      for (const option of question.answers) {
+        option.isSelected = false;
+      }
+    }
+    this.correctAnswerCount = 0;
+    this.remainingTime = 10;
+  }
+
   startQuiz(){
     this.showWarning =false;
     this.isQuizStarted = true;
@@ -66,7 +94,6 @@ finish() {
   nextbtn(){
     if(this.currentQuestionNo < this.questionsList.length-1){
       this.currentQuestionNo ++;
-      this.remainingTime = 10;
 
    }else{
     this.subscription.forEach(element => {
@@ -76,10 +103,11 @@ finish() {
   }
 
  selectOption(option: any){
-    if(option.isCorrect) {
+    if(option.is_correct) {
           this.correctAnswerCount ++;
          }
         option.isSelected = true;
+      
      }
 
 
