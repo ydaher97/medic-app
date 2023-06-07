@@ -18,7 +18,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = 'http://localhost:3000/posts';
+  private apiUrl = 'http://localhost:3000/api/posts';
 
 
   constructor(private http:HttpClient,private errorHandlerService: ErrorHandlerService) { }

@@ -13,7 +13,7 @@ import { ErrorHandlerService } from './error-handler.service';
   providedIn: 'root'
 })
 export class QuizService {
-  private apiUrl = 'http://localhost:3000/quizzes';
+  private apiUrl = 'http://localhost:3000/api/quizzes';
 
 
   constructor(private http:HttpClient,private errorHandlerService: ErrorHandlerService) { }
@@ -35,8 +35,10 @@ export class QuizService {
   }
 
 
-  getQuestions() {
-    return this.http.get<any[]>('http://localhost:3000/api/questions');
+  getQuestions() : Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}/questions`,{ responseType: "json"}).pipe(
+      catchError(this.errorHandlerService.handleError<any[]>("fetchAll", []))
+    );
   }
 }
  

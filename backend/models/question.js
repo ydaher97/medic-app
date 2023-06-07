@@ -26,5 +26,13 @@ module.exports = class Questions {
             'DELETE  FROM question WHERE id = ?', [q_id]
         );
     }
+
+    static getQuestions() {
+        return db.execute(
+          `SELECT q.question_id, q.question_text, a.answer_id, a.answer_text, a.is_correct
+          FROM question AS q
+          LEFT JOIN answer AS a ON q.question_id = a.question_id`
+        );
+      }
 };
 

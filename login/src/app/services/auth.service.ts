@@ -21,7 +21,7 @@ export class AuthService {
 
   constructor(private http: HttpClient,private errorHandlerService: ErrorHandlerService,
     private router: Router) { }
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = 'http://localhost:3000/api/auth';
 
   signup(user: Omit<User ,"id">): Observable<User>{
     return this.http.post<User>(`${this.apiUrl}/signup`, user,httpOptions).pipe(

@@ -35,8 +35,33 @@ exports.createQuestion = async (req, res, next) => {
 
 exports.fitchAll = async (req, res, next) => {
     try{
-        const [allQuestions] = await Questions.fetchAll();
-        res.status(200).json(allQuestions);
+        const results = await Questions.getQuestions();
+        const data = results[0];
+        const questions = [];
+  
+        let currentQuestion = null;
+  
+        data.forEach((row) => {
+          if (!currentQuestion || currentQuestion.question_id !== row.question_id) {
+            currentQuestion = {
+              question_id: row.question_id,
+              question_text: row.question_text,
+              answers: [],
+            };
+            questions.push(currentQuestion);
+          }
+  
+          if (row.answer_id) {
+            const answer = {
+              answer_id: row.answer_id,
+              answer_text: row.answer_text,
+              is_correct: row.is_correct === 1,
+            };
+            currentQuestion.answers.push(answer);
+          }
+        });
+  
+        res.json(questions);
     }catch(err){
         //handle
         if(!err.statusCode){

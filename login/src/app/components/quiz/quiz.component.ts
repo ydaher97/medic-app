@@ -14,9 +14,10 @@ export class QuizComponent implements OnInit{
   isQuizStarted:boolean =false;
   isQuizEnded: boolean = false;
   currentQuestionNo: number = 0;
+  //questions!: Observable<any[]>;
   questionsList: any[]= [];
- // quizzes: Observable<any[]> | undefined;
- question: any;
+ // questions: Observable<any[]> | undefined;
+ //question: any;
   remainingTime:number = 10;
   timer = interval(1000);
   subscription: Subscription [] = []
@@ -25,7 +26,7 @@ export class QuizComponent implements OnInit{
 constructor(private quizService:QuizService){}
 
 ngOnInit(): void {
-  
+ // this.questions = this.fetchAll();
   this.quizService.getQuestions().subscribe(
     (response) => {
       this.questionsList = response;
@@ -36,6 +37,10 @@ ngOnInit(): void {
     }
   );
 }
+/*
+fetchAll(): Observable<any[]>{
+  return this.quizService.getQuestions();
+}*/
 
 finish() {
      this.isQuizEnded = true;
@@ -51,6 +56,26 @@ finish() {
     this.isQuizStarted = true;
     this.isQuizEnded = false;
     this.currentQuestionNo = 0;
+
+  
+    for (const question of this.questionsList) {
+      for (const option of question.answers) {
+        option.isSelected = false;
+      }
+    }
+    this.correctAnswerCount = 0;
+    this.remainingTime = 10;
+  }
+  
+
+  start(){
+    this.showWarning = false;
+    this.isQuizStarted = false;
+    this.isQuizEnded = false;
+    this.currentQuestionNo = 0;
+
+
+  
     for (const question of this.questionsList) {
       for (const option of question.answers) {
         option.isSelected = false;
@@ -60,19 +85,6 @@ finish() {
     this.remainingTime = 10;
   }
 
-  start(){
-    this.showWarning = false;
-    this.isQuizStarted = false;
-    this.isQuizEnded = false;
-    this.currentQuestionNo = 0;
-    for (const question of this.questionsList) {
-      for (const option of question.answers) {
-        option.isSelected = false;
-      }
-    }
-    this.correctAnswerCount = 0;
-    this.remainingTime = 10;
-  }
 
   startQuiz(){
     this.showWarning =false;
@@ -94,8 +106,8 @@ finish() {
   nextbtn(){
     if(this.currentQuestionNo < this.questionsList.length-1){
       this.currentQuestionNo ++;
-
-   }else{
+   } 
+   else{
     this.subscription.forEach(element => {
       element.unsubscribe();
     })

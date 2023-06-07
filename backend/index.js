@@ -26,10 +26,10 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 
-app.use('/posts',postsRoutes);
-app.use('/quizzes', quizzesRoutes);
+app.use('/api/posts',postsRoutes);
+app.use('/api/quizzes', quizzesRoutes);
 app.get('/api/quiz/:quizId/questions', (req, res) => {
     const quizId = req.params.quizId;
     
@@ -140,53 +140,52 @@ app.get('/api/quiz/:quizId/questions', (req, res) => {
       });
   });
   
-  
-  app.get('/api/questions', (req, res) => {
-    // Execute the SQL query to fetch the questions and their answers
-    db.execute(
-      `SELECT q.question_id, q.question_text, a.answer_id, a.answer_text, a.is_correct
-      FROM question AS q
-      LEFT JOIN answer AS a ON q.question_id = a.question_id`
-    )
-      .then((results) => {
-        const data = results[0];
+    
+/*app.get('/questions', (req, res) => {
+  // Execute the SQL query to fetch the questions and their answers
+  db.execute(
+    `SELECT q.question_id, q.question_text, a.answer_id, a.answer_text, a.is_correct
+    FROM question AS q
+    LEFT JOIN answer AS a ON q.question_id = a.question_id`
+  )
+    .then((results) => {
+      const data = results[0];
+      
+      // Format the result into the desired structure
+      const questions = [];
+      
+      let currentQuestion = null;
+      
+      // Iterate over the rows and group answers by question
+      data.forEach((row) => {
+        if (!currentQuestion || currentQuestion.question_id !== row.question_id) {
+          currentQuestion = {
+            question_id: row.question_id,
+            question_text: row.question_text,
+            answers: [],
+          };
+          questions.push(currentQuestion);
+        }
         
-        // Format the result into the desired structure
-        const questions = [];
-        
-        let currentQuestion = null;
-        
-        // Iterate over the rows and group answers by question
-        data.forEach((row) => {
-          if (!currentQuestion || currentQuestion.question_id !== row.question_id) {
-            currentQuestion = {
-              question_id: row.question_id,
-              question_text: row.question_text,
-              answers: [],
-            };
-            questions.push(currentQuestion);
-          }
-          
-          if (row.answer_id) {
-            const answer = {
-              answer_id: row.answer_id,
-              answer_text: row.answer_text,
-              is_correct: row.is_correct === 1, // Convert 1 or 0 to boolean
-            };
-            currentQuestion.answers.push(answer);
-          }
-        });
-        
-        // Send the formatted questions as a JSON response
-        res.json(questions);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the database query
-        console.error(error);
-        res.status(500).json({ error: 'An error occurred while fetching the questions.' });
+        if (row.answer_id) {
+          const answer = {
+            answer_id: row.answer_id,
+            answer_text: row.answer_text,
+            is_correct: row.is_correct === 1, // Convert 1 or 0 to boolean
+          };
+          currentQuestion.answers.push(answer);
+        }
       });
-  });
-  
+      
+      // Send the formatted questions as a JSON response
+      res.json(questions);
+    })
+    .catch((error) => {
+      // Handle any errors that occur during the database query
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while fetching the questions.' });
+    });
+});*/
 
 
 app.use(errorController.get404);
