@@ -6,3 +6,6 @@ button{
     float: right;
     width: 200px;
 }
+.container{
+    margin: 100px 10%;
+}

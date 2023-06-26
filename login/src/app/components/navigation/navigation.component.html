@@ -3,6 +3,8 @@
        <span class="left"><a routerLink="/">
         <span >MEDIC APP</span></a></span> 
         <span class="right">
+            <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/profile">
+                <span >profile</span></a>
             <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/posts">
                 <span >topics</span></a>
             <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/quizzes">

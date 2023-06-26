@@ -45,6 +45,9 @@ fetchAll(): Observable<any[]>{
 finish() {
      this.isQuizEnded = true;
      this.isQuizStarted = false;  
+     this.subscription.forEach(element => {
+      element.unsubscribe();
+    })
   }
 
   showWarningPopup(){
@@ -56,7 +59,7 @@ finish() {
     this.isQuizStarted = true;
     this.isQuizEnded = false;
     this.currentQuestionNo = 0;
-
+    this.timer = interval(1000);
   
     for (const question of this.questionsList) {
       for (const option of question.answers) {
@@ -64,7 +67,17 @@ finish() {
       }
     }
     this.correctAnswerCount = 0;
-    this.remainingTime = 10;
+    this.subscription.push(this.timer.subscribe(res => {
+      console.log(res);
+      if(this.remainingTime != 0){
+        this.remainingTime --;
+      }
+      if(this.remainingTime == 0 ){
+        this.nextbtn();
+        
+      }
+      
+    }))
   }
   
 
@@ -97,7 +110,7 @@ finish() {
       }
       if(this.remainingTime == 0 ){
         this.nextbtn();
-        this.remainingTime = 10;
+        
       }
       
     }))
@@ -107,11 +120,7 @@ finish() {
     if(this.currentQuestionNo < this.questionsList.length-1){
       this.currentQuestionNo ++;
    } 
-   else{
-    this.subscription.forEach(element => {
-      element.unsubscribe();
-    })
-   }
+   this.remainingTime = 10;
   }
 
  selectOption(option: any){

@@ -21,10 +21,16 @@ export class AuthService {
 
   constructor(private http: HttpClient,private errorHandlerService: ErrorHandlerService,
     private router: Router) { }
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'http://localhost:3000/api';
+
+  getUserProfile(userId: Pick<User,"id">): Observable<User> {
+    const url = `${this.apiUrl}/users/${userId}`; // Replace with the actual API endpoint for fetching user data
+    return this.http.get<User>(url);
+  }
+
 
   signup(user: Omit<User ,"id">): Observable<User>{
-    return this.http.post<User>(`${this.apiUrl}/signup`, user,httpOptions).pipe(
+    return this.http.post<User>(`${this.apiUrl}/auth/signup`, user,httpOptions).pipe(
       first(),
       catchError(this.errorHandlerService.handleError<User>("signup"))
     );
@@ -33,7 +39,7 @@ export class AuthService {
 
 
   login(email: Pick<User, "email">, password: Pick<User, "password">): Observable<{ token: string; userId: Pick<User, "id"> }> {
-  return this.http.post(`${this.apiUrl}/login`, { email, password }, httpOptions)
+  return this.http.post(`${this.apiUrl}/auth/login`, { email, password }, httpOptions)
     .pipe(
       first(),
       tap((tokenObject: { token: string; userId: Pick<User, "id"> }| any  ) => {

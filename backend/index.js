@@ -5,6 +5,8 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const postsRoutes = require('./routes/posts');
 const quizzesRoutes = require('./routes/quizzes');
+const profileRoutes = require('./routes/profile');
+
 const db = require('./util/database');
 
 
@@ -30,6 +32,10 @@ app.use('/api/auth', authRoutes);
 
 app.use('/api/posts',postsRoutes);
 app.use('/api/quizzes', quizzesRoutes);
+app.use('/api/profile', profileRoutes);
+
+
+
 app.get('/api/quiz/:quizId/questions', (req, res) => {
     const quizId = req.params.quizId;
     
@@ -186,7 +192,46 @@ app.get('/api/quiz/:quizId/questions', (req, res) => {
       res.status(500).json({ error: 'An error occurred while fetching the questions.' });
     });
 });*/
+// Endpoint to fetch user profile
+app.get('/api/users/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  const query = 'SELECT * FROM users WHERE id = ?';
 
+  try {
+    const [results] = await db.execute(query, [userId]);
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const user = results[0];
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Endpoint to fetch user quiz scores
+app.get('/api/userquiz/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  const query = 'SELECT * FROM userquiz WHERE user_id = ?';
+
+  try {
+    const [results] = await db.execute(query, [userId]);
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const user = results[0];
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 app.use(errorController.get404);
 

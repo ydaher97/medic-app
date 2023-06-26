@@ -22,6 +22,12 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
 import { AuthInterService } from './services/auth-inter.service';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { QuizzesComponent } from './components/quizzes/quizzes.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
+import { MainProfileComponent } from './components/main-profile/main-profile.component';
+import { TopWidgetsComponent } from './components/top-widgets/top-widgets.component';
+import { TopUsersComponent } from './components/top-users/top-users.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -34,7 +40,12 @@ import { QuizzesComponent } from './components/quizzes/quizzes.component';
     PostsComponent,
     CreatePostComponent,
     QuizComponent,
-    QuizzesComponent
+    QuizzesComponent,
+    ProfileComponent,
+    ProfileHeaderComponent,
+    MainProfileComponent,
+    TopWidgetsComponent,
+    TopUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +58,7 @@ import { QuizzesComponent } from './components/quizzes/quizzes.component';
     MatToolbarModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FontAwesomeModule,
   ],
   providers: [
     {

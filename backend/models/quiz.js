@@ -1,12 +1,13 @@
 const db = require('../util/database');
 
 module.exports = class  quezzes {
-    constructor(title, describtion ,duration,category){
+    constructor(title, describtion ,duration,is_completed,category){
 
     this.title = title;
     this.describtion = describtion;
     this.duration = duration;
     this.category = category;
+    this.is_completed = is_completed;
 
 
     }
