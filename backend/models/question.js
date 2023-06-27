@@ -29,7 +29,7 @@ module.exports = class Questions {
 
     static getQuestions() {
         return db.execute(
-          `SELECT q.question_id, q.question_text, a.answer_id, a.answer_text, a.is_correct
+          `SELECT q.question_id, q.quiz_id, q.question_text, a.answer_id, a.answer_text, a.is_correct
           FROM question AS q
           LEFT JOIN answer AS a ON q.question_id = a.question_id`
         );

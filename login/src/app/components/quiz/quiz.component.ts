@@ -54,6 +54,12 @@ finish() {
     this.showWarning = true;
   }
 
+  exit(){
+     this.isQuizStarted = false;  
+     this.showWarning = false;
+
+  }
+
   replay(){
     this.showWarning =false;
     this.isQuizStarted = true;

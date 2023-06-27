@@ -45,6 +45,7 @@ exports.fitchAll = async (req, res, next) => {
           if (!currentQuestion || currentQuestion.question_id !== row.question_id) {
             currentQuestion = {
               question_id: row.question_id,
+              quiz_id:row.quiz_id,
               question_text: row.question_text,
               answers: [],
             };
