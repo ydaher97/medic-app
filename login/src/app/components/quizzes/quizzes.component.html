@@ -1,1 +1,7 @@
-<div class="quizzes"><app-quiz *ngFor="let quiz of quizzes |async"  [quiz]="quiz"></app-quiz></div>
+<div class="quizzes" *ngIf="!isQuizInProgress">
+    <app-quiz *ngFor="let quiz of quizzes |async"
+      [quiz]="quiz"
+      [hidden]="selectedQuizId !== null && quiz.quiz_id !== selectedQuizId"></app-quiz>
+      
+    
+</div>

@@ -10,6 +10,8 @@ import { Observable, Subscription, interval } from 'rxjs';
 })
 export class QuizzesComponent {
   quizzes: Observable<any[]> | undefined;
+  isQuizInProgress: boolean = false;
+  selectedQuizId: number | null = null;
 
 
   constructor(private quizService:QuizService){}
@@ -19,6 +21,13 @@ export class QuizzesComponent {
    /* this.quizService.fetchAll().subscribe((quizzes) => {
       this.quizzes = quizzes;
     })*/
+    this.quizService.isQuizInProgress$.subscribe((isInProgress) => {
+      this.isQuizInProgress = isInProgress;
+    });
+
+    this.quizService.selectedQuizId$.subscribe((quizId) => {
+      this.selectedQuizId = quizId;
+    });
   }
 
   fetchAll(): Observable<any[]>{

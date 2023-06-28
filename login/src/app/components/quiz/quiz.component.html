@@ -1,4 +1,4 @@
-<div class="start_btn" (click)="showWarningPopup()">{{quiz.title}}<button>start quiz</button></div>
+<div class="start_btn" *ngIf="!isQuizStarted"  (click)="showWarningPopup()">{{quiz.title}}<button>start quiz</button></div>
 
 <div class="info_box" [ngClass]="showWarning ? 'activeInfo': ''">
     <div class="info-title"><span>some rules of this quiz</span></div>

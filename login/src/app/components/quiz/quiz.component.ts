@@ -1,4 +1,4 @@
-import { Component, OnInit,Input , Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Input , Output,EventEmitter, OnDestroy } from '@angular/core';
 import { Observable, Subscription, interval } from 'rxjs';
 import { QuizService } from 'src/app/services/quiz.service';
 
@@ -9,15 +9,16 @@ import { QuizService } from 'src/app/services/quiz.service';
 })
 export class QuizComponent implements OnInit{
   @Input() quiz!:any;
+  private selectedQuizIdSubscription: Subscription | undefined;
+
+
 
   showWarning: boolean = false;
   isQuizStarted:boolean =false;
   isQuizEnded: boolean = false;
   currentQuestionNo: number = 0;
-  //questions!: Observable<any[]>;
   questionsList: any[]= [];
- // questions: Observable<any[]> | undefined;
- //question: any;
+ 
   remainingTime:number = 10;
   timer = interval(1000);
   subscription: Subscription [] = []
@@ -29,13 +30,14 @@ ngOnInit(): void {
  // this.questions = this.fetchAll();
   this.quizService.getQuestions().subscribe(
     (response) => {
-      this.questionsList = response;
+      this.questionsList =  response.filter((question) => question.quiz_id === this.quiz.quiz_id);
       console.log(this.questionsList);
     },
     (error) => {
       console.error('An error occurred while fetching the question:', error);
     }
   );
+
 }
 /*
 fetchAll(): Observable<any[]>{
@@ -57,7 +59,10 @@ finish() {
   exit(){
      this.isQuizStarted = false;  
      this.showWarning = false;
-
+     if (this.selectedQuizIdSubscription) {
+      this.selectedQuizIdSubscription.unsubscribe();
+    }
+  
   }
 
   replay(){
@@ -106,6 +111,19 @@ finish() {
 
 
   startQuiz(){
+    //this.quizService.setQuizInProgress(true);
+    // this.selectedQuizIdSubscription = this.quizService.selectedQuizId$.subscribe((selectedQuizId) => {
+    //   // Handle changes to the selected quiz ID here
+    //   if (selectedQuizId === this.quiz.quiz_id) {
+    //     // The current quiz is selected
+    //     console.log('Current quiz is selected');
+    //   } else {
+    //     // The current quiz is not selected
+    //     console.log('Current quiz is not selected');
+    //   }
+    // });
+    this.quizService.setSelectedQuizId(this.quiz.quiz_id)
+
     this.showWarning =false;
     this.isQuizStarted = true;
     this.isQuizEnded = false;

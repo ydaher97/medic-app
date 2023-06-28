@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Post } from '../models/Post';
-import { User } from '../models/User';
+
  
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable,BehaviorSubject } from 'rxjs';
 import {catchError, first} from 'rxjs/operators';
 
 import { ErrorHandlerService } from './error-handler.service';
@@ -15,6 +14,19 @@ import { ErrorHandlerService } from './error-handler.service';
 export class QuizService {
   private apiUrl = 'http://localhost:3000/api/quizzes';
 
+  private isQuizInProgressSubject = new BehaviorSubject<boolean>(false);
+  isQuizInProgress$ = this.isQuizInProgressSubject.asObservable();
+
+  private selectedQuizIdSubject = new BehaviorSubject<number | null>(null);
+  selectedQuizId$ = this.selectedQuizIdSubject.asObservable();
+
+  setQuizInProgress(isInProgress: boolean) {
+    this.isQuizInProgressSubject.next(isInProgress);
+  }
+
+  setSelectedQuizId(quizId: number | null) {
+    this.selectedQuizIdSubject.next(quizId);
+  }
 
   constructor(private http:HttpClient,private errorHandlerService: ErrorHandlerService) { }
 
