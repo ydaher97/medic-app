@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   faLocation,
   faShop,
@@ -16,4 +16,6 @@ export class TopWidgetsComponent {
   faShop = faShop;
   faBoxes = faBoxes;
   faMoneyBill = faMoneyBill;
+
+  @Input() score: any;
 }

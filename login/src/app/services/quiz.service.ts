@@ -14,15 +14,15 @@ import { ErrorHandlerService } from './error-handler.service';
 export class QuizService {
   private apiUrl = 'http://localhost:3000/api/quizzes';
 
-  private isQuizInProgressSubject = new BehaviorSubject<boolean>(false);
-  isQuizInProgress$ = this.isQuizInProgressSubject.asObservable();
+  // private isQuizInProgressSubject = new BehaviorSubject<boolean>(false);
+  // isQuizInProgress$ = this.isQuizInProgressSubject.asObservable();
 
   private selectedQuizIdSubject = new BehaviorSubject<number | null>(null);
-  selectedQuizId$ = this.selectedQuizIdSubject.asObservable();
+  public selectedQuizId$ = this.selectedQuizIdSubject.asObservable();
 
-  setQuizInProgress(isInProgress: boolean) {
-    this.isQuizInProgressSubject.next(isInProgress);
-  }
+  // setQuizInProgress(isInProgress: boolean) {
+  //   this.isQuizInProgressSubject.next(isInProgress);
+  // }
 
   setSelectedQuizId(quizId: number | null) {
     this.selectedQuizIdSubject.next(quizId);

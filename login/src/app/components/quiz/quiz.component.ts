@@ -9,6 +9,8 @@ import { QuizService } from 'src/app/services/quiz.service';
 })
 export class QuizComponent implements OnInit{
   @Input() quiz!:any;
+  // @Output() quizStarted = new EventEmitter<number>();
+  // @Output() quizFinished = new EventEmitter<void>();
   private selectedQuizIdSubscription: Subscription | undefined;
 
 
@@ -54,18 +56,18 @@ finish() {
 
   showWarningPopup(){
     this.showWarning = true;
+    this.quizService.setSelectedQuizId(this.quiz.quiz_id)
   }
 
   exit(){
      this.isQuizStarted = false;  
      this.showWarning = false;
-     if (this.selectedQuizIdSubscription) {
-      this.selectedQuizIdSubscription.unsubscribe();
-    }
-  
+     this.quizService.setSelectedQuizId(null)
+
   }
 
   replay(){
+
     this.showWarning =false;
     this.isQuizStarted = true;
     this.isQuizEnded = false;
@@ -93,12 +95,12 @@ finish() {
   
 
   start(){
+    this.quizService.setSelectedQuizId(null)
+
     this.showWarning = false;
     this.isQuizStarted = false;
     this.isQuizEnded = false;
     this.currentQuestionNo = 0;
-
-
   
     for (const question of this.questionsList) {
       for (const option of question.answers) {
@@ -122,7 +124,9 @@ finish() {
     //     console.log('Current quiz is not selected');
     //   }
     // });
-    this.quizService.setSelectedQuizId(this.quiz.quiz_id)
+    
+
+    
 
     this.showWarning =false;
     this.isQuizStarted = true;
