@@ -1,9 +1,0 @@
-<div *ngFor="let question of questions">
-    <h2>{{ question.question_text }}</h2>
-    <ul>
-      <li *ngFor="let answer of question.answers">
-        {{ answer.answer_text }} ({{ answer.is_correct ? 'Correct' : 'Incorrect' }})
-      </li>
-    </ul>
-  </div>
-  

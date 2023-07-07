@@ -24,7 +24,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/api';
 
   getUserProfile(userId: Pick<User,"id">): Observable<User> {
-    const url = `${this.apiUrl}/users/${userId}`; // Replace with the actual API endpoint for fetching user data
+    const url = `${this.apiUrl}/users/${userId}`;
     return this.http.get<User>(url);
   }
 
