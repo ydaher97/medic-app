@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavigationComponent implements OnInit {
   isAuthenticated = false;
-
+  isMenuOpen = true;
   constructor(private authService:AuthService,private router:Router){
 
   }
@@ -25,4 +25,8 @@ export class NavigationComponent implements OnInit {
     this.authService.isUserLoggedIn$.next(false);
     this.router.navigate(["login"])
    }
+
+   toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 }

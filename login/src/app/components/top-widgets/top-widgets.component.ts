@@ -4,6 +4,7 @@ import {
   faShop,
   faBoxes,
   faMoneyBill,
+  faCheck
 } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-top-widgets',
@@ -16,6 +17,7 @@ export class TopWidgetsComponent {
   faShop = faShop;
   faBoxes = faBoxes;
   faMoneyBill = faMoneyBill;
+  faCheck =faCheck;
 
   @Input() score: any;
 }

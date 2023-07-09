@@ -1,0 +1,39 @@
+.top-users {
+    margin-top: 24px;
+  }
+  
+  .user-card {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 12px;
+    margin-bottom: 7px;
+  }
+  
+  .rank {
+    font-size: 20px;
+    font-weight: bold;
+    width: 32px;
+    height: 32px;
+    background-color: #3f51b5;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .name {
+    font-weight: bold;
+  }
+  
+  .score {
+    color: #888888;
+  }
+  

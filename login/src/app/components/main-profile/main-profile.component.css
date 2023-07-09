@@ -13,6 +13,9 @@
     @media only screen and (max-width: 1200px) {
       width: 980px;
     }
+    @media only screen and (max-width: 500px) {
+      width: 380px;
+    }
   }
   .middle-section {
     display: flex;

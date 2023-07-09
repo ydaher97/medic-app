@@ -1,19 +1,41 @@
 <mat-toolbar class="mat" color="primary">
-    
-       <span class="left"><a routerLink="/">
-        <span >MEDIC APP</span></a></span> 
-        <span class="right">
-            <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/profile">
-                <span >profile</span></a>
-            <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/posts">
-                <span >topics</span></a>
-            <a  *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/quizzes">
-                    <span >quiz</span></a>
-            <a *ngIf="!isAuthenticated" routerLinkActive="active-link" routerLink="/login">
-                <span >login</span></a>
-            <a *ngIf="isAuthenticated" (click)="logout()" routerLinkActive="active-link" routerLink="/login">
-                <span >logout</span></a>
-            <a *ngIf="!isAuthenticated" routerLinkActive="active-link" routerLink="/signup">
-                <span >signup</span></a>
-        </span >
-</mat-toolbar>
+    <div class="left">
+      <a routerLink="/">
+        <span>MEDIC APP</span>
+      </a>
+    </div>
+    <div class="login">
+        <a *ngIf="!isAuthenticated" routerLinkActive="active-link" routerLink="/login">
+            <span>login</span>
+          </a>
+          <a *ngIf="!isAuthenticated" routerLinkActive="active-link" routerLink="/signup">
+            <span>signup</span>
+          </a>
+    </div>
+    <div class="right" *ngIf="isAuthenticated" [ngClass]="{ 'open': isMenuOpen }">
+      <a *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/profile">
+        <span>profile</span>
+      </a>
+      <a *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/posts">
+        <span>topics</span>
+      </a>
+      <a *ngIf="isAuthenticated" routerLinkActive="active-link" routerLink="/quizzes">
+        <span>quiz</span>
+      </a>
+      
+      <a *ngIf="isAuthenticated" (click)="logout()" routerLinkActive="active-link" routerLink="/login">
+        <span>logout</span>
+      </a>
+      
+        
+      
+    </div>
+    <div *ngIf="isAuthenticated">
+        <button class="burger-menu" (click)="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+  </mat-toolbar>
+  
