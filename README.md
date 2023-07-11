@@ -20,7 +20,7 @@ Existing users can log in using their username and password. The password is ver
 ### Posts 
 Users can share their thoughts on various topics 
 
-![image](https://github.com/ydaher97/medic-app/assets/73422885/77d0cc1c-c580-4208-8167-290c8a820402)
+![image](https://github.com/ydaher97/medic-app/assets/73422885/d55284b5-56be-4e08-90f8-eab7163f0de8)
 
 
 ### Quizzes
