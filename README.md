@@ -7,6 +7,9 @@
 
 New users can create an account by providing their username, email, and password. The password is hashed before storing it in the database for enhanced security.
 
+![image](https://github.com/ydaher97/medic-app/assets/73422885/77d0cc1c-c580-4208-8167-290c8a820402)
+
+
 ### Log in
 
 Existing users can log in using their username and password. The password is verified by comparing the hashed password stored in the database with the hashed version of the provided password.
